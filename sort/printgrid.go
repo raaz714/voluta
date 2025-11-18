@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"voluta/sort/types"
+	"github.com/raaz714/voluta/sort/types"
 
 	"github.com/charmbracelet/lipgloss"
 )

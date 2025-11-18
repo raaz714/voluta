@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"voluta/maze/types"
+	"github.com/raaz714/voluta/maze/types"
 
 	"github.com/charmbracelet/lipgloss"
 )

@@ -1,6 +1,6 @@
 package gameoflife
 
-import "voluta/gameoflife/types"
+import "github.com/raaz714/voluta/gameoflife/types"
 
 func printGrid(G types.Grid, row, col int) string {
 	res := ""

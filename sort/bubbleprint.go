@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"voluta/sort/types"
+	"github.com/raaz714/voluta/sort/types"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"

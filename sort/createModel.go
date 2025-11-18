@@ -3,7 +3,7 @@ package sort
 import (
 	"math/rand"
 
-	"voluta/sort/types"
+	"github.com/raaz714/voluta/sort/types"
 
 	"github.com/charmbracelet/x/term"
 	"github.com/lucasb-eyer/go-colorful"

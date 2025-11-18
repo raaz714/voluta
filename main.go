@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 
-	"voluta/gameoflife"
-	"voluta/maze"
-	"voluta/sort"
+	"github.com/raaz714/voluta/gameoflife"
+	"github.com/raaz714/voluta/maze"
+	"github.com/raaz714/voluta/sort"
 )
 
 func main() {

@@ -1,6 +1,6 @@
 package solve
 
-import "voluta/maze/types"
+import "github.com/raaz714/voluta/maze/types"
 
 func SolveMazeDFS(
 	G types.AdjList,

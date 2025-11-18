@@ -3,7 +3,7 @@ package populate
 import (
 	"math/rand"
 
-	"voluta/maze/types"
+	"github.com/raaz714/voluta/maze/types"
 )
 
 var directions = []int{0, -1, 0, 1, 0}

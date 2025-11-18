@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"voluta/gameoflife/types"
+	"github.com/raaz714/voluta/gameoflife/types"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"

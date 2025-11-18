@@ -3,9 +3,9 @@ package maze
 import (
 	"math/rand"
 
-	"voluta/maze/populate"
-	"voluta/maze/solve"
-	"voluta/maze/types"
+	"github.com/raaz714/voluta/maze/populate"
+	"github.com/raaz714/voluta/maze/solve"
+	"github.com/raaz714/voluta/maze/types"
 
 	"github.com/charmbracelet/x/term"
 )

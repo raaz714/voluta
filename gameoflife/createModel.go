@@ -3,7 +3,7 @@ package gameoflife
 import (
 	"math/rand"
 
-	"voluta/gameoflife/types"
+	"github.com/raaz714/voluta/gameoflife/types"
 
 	"github.com/charmbracelet/x/term"
 )
