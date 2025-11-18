@@ -10,7 +10,7 @@ func printGrid(G types.Grid) string {
 	res := ""
 	for _, x := range G {
 		for _, y := range x {
-			s := lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color(y.Color))
+			s := lipgloss.NewStyle().SetString("  ").Background(lipgloss.Color(y.Color))
 			res += s.String()
 		}
 		res += "\n"
@@ -22,10 +22,24 @@ func printGrid(G types.Grid) string {
 func bubbleSortPass(G types.Grid) bool {
 	swapped := false // Flag to track if any swaps occurred in this pass
 
+	for i := 0; i < len(G)-1; i++ {
+		// Compare adjacent elements
+		if G[i][0].X > G[i+1][0].X {
+			// Swap if they are in the wrong order
+			G[i], G[i+1] = G[i+1], G[i]
+			swapped = true
+		}
+	}
+	return swapped // Return true if a swap occurred, indicating the array is not yet sorted
+}
+
+func bubbleSortPassRow(G types.Grid) bool {
+	swapped := false // Flag to track if any swaps occurred in this pass
+
 	for _, row := range G {
 		for i := 0; i < len(row)-1; i++ {
 			// Compare adjacent elements
-			if row[i].X > row[i+1].X {
+			if row[i].Y > row[i+1].Y {
 				// Swap if they are in the wrong order
 				row[i], row[i+1] = row[i+1], row[i]
 				swapped = true
@@ -39,7 +53,7 @@ func insertionSortPass(G types.Grid) bool {
 	swapped := false
 	for _, row := range G {
 		indexToInsert := 1
-		for row[indexToInsert].X >= row[indexToInsert-1].X {
+		for row[indexToInsert].Y >= row[indexToInsert-1].Y {
 			indexToInsert++
 			if indexToInsert >= len(row) {
 				break
@@ -56,7 +70,7 @@ func insertionSortPass(G types.Grid) bool {
 
 		// Move elements of the sorted subarray that are greater than key
 		// one position ahead of their current position
-		for j >= 0 && row[j].X > key.X {
+		for j >= 0 && row[j].Y > key.Y {
 			row[j+1] = row[j]
 			j--
 		}
@@ -69,6 +83,7 @@ func insertionSortPass(G types.Grid) bool {
 }
 
 func updateGrid(G types.Grid) bool {
-	// return bubbleSortPass(G)
-	return insertionSortPass(G)
+	flag1 := bubbleSortPass(G)
+	flag2 := /*bubbleSortPassRow(G) */ insertionSortPass(G)
+	return flag1 || flag2
 }

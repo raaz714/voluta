@@ -1,6 +1,7 @@
 package sort
 
 import (
+	"fmt"
 	"math/rand"
 
 	"github.com/raaz714/voluta/sort/types"
@@ -19,7 +20,8 @@ func createNewModel() *model {
 		return nil
 	}
 
-	row, col := height/2, width/2
+	row := min(height*5/6, width/2-10)
+	col := row
 
 	m := model{}
 	m.G = createGrid(row, col)
@@ -31,18 +33,16 @@ func createNewModel() *model {
 }
 
 func initiateGrid(G types.Grid) {
-	for _, row := range G {
-		rand.Shuffle(len(row), func(i, j int) {
-			row[i], row[j] = row[j], row[i]
-		})
-	}
-}
-
-func createGrid(row, col int) types.Grid {
-	x0y0, _ := colorful.Hex("#F27D94")
-	x1y0, _ := colorful.Hex("#EDFF82")
-	x0y1, _ := colorful.Hex("#643AFF")
-	x1y1, _ := colorful.Hex("#14F9D5")
+	row := len(G)
+	col := len(G[0])
+	// x0y0, _ := colorful.Hex("#F27D94")
+	// x1y0, _ := colorful.Hex("#EDFF82")
+	// x0y1, _ := colorful.Hex("#643AFF")
+	// x1y1, _ := colorful.Hex("#14F9D5")
+	x0y0, _ := colorful.Hex(generateRandomHexColor())
+	x1y0, _ := colorful.Hex(generateRandomHexColor())
+	x0y1, _ := colorful.Hex(generateRandomHexColor())
+	x1y1, _ := colorful.Hex(generateRandomHexColor())
 
 	x0 := make([]colorful.Color, row)
 	for i := range x0 {
@@ -53,15 +53,40 @@ func createGrid(row, col int) types.Grid {
 	for i := range x1 {
 		x1[i] = x1y0.BlendLuv(x1y1, float64(i)/float64(row))
 	}
-
-	grid := make([][]types.IndexedColor, row)
 	for x := range row {
 		y0 := x0[x]
-		grid[x] = make([]types.IndexedColor, col)
 		for y := range col {
-			grid[x][y] = types.IndexedColor{X: y, Color: y0.BlendLuv(x1[x], float64(y)/float64(col)).Hex()}
+			G[x][y] = types.IndexedColor{X: x, Y: y, Color: y0.BlendLuv(x1[x], float64(y)/float64(col)).Hex()}
 		}
 	}
+	rand.Shuffle(len(G), func(i, j int) {
+		G[i], G[j] = G[j], G[i]
+	})
+
+	for _, row := range G {
+		rand.Shuffle(len(row), func(i, j int) {
+			row[i], row[j] = row[j], row[i]
+		})
+	}
+}
+
+func generateRandomHexColor() string {
+	// Generate three random integers for R, G, and B components (0-255)
+	r := rand.Intn(256)
+	g := rand.Intn(256)
+	b := rand.Intn(256)
+
+	// Format the integers as a hexadecimal string
+	hexColor := fmt.Sprintf("#%02x%02x%02x", r, g, b)
+	return hexColor
+}
+
+func createGrid(row, col int) types.Grid {
+	grid := make([][]types.IndexedColor, row)
+	for x := range row {
+		grid[x] = make([]types.IndexedColor, col)
+	}
+	initiateGrid(grid)
 
 	return grid
 }
